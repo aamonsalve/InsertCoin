@@ -1,0 +1,61 @@
+<ion-header>
+
+  <!--Barra toolbar-->
+  <ion-toolbar color="#003791">
+
+    <ion-title style="color:#fff">
+      Inicio Sesión
+    </ion-title>
+  </ion-toolbar>
+  <!--Se acaba el header-->
+</ion-header>
+
+<!--Empezamos donde meteremos la informacion-->
+<ion-content style="background-image: url('/assets/fotos/fondo.gif')" class="fixed-scroll">
+
+  <img class="fondo" src="/assets/fotos/fondo.gif" />
+
+  <div class="login">
+  <form class="form" [formGroup]="validations_form">
+    
+
+      <ion-label position="floating" class="fixed-scroll"> Correo electrónico</ion-label>
+      <ion-input type="text" [(ngModel)]="email" formControlName="email" name="email"></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message"
+            *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+
+      <ion-label position="floating" class="fixed-scroll"> Contraseña</ion-label>
+      <ion-input [(ngModel)]="password" formControlName="password" type="password" name="password"></ion-input>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div class="error-message"
+            *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      
+
+      <br>
+      <ion-button (click)="login()" expand="block" [disabled]="!validations_form.valid">Entrar</ion-button>
+      <label class="error-message">{{errorMessage}}</label>
+  </form>
+
+  <br>
+  <ion-label>¿Quieres Registrarte?</ion-label><a text-center routerLink="/registro" class="crear"> Crear
+    cuenta</a><br />
+  <p class="invitado" routerLink="/home">Modo Invitado</p>
+  </div>
+
+
+
+
+</ion-content>

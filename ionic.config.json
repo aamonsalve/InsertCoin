@@ -1,5 +1,7 @@
 {
   "name": "Insert-Coin",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

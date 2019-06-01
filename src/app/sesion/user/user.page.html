@@ -1,0 +1,42 @@
+<ion-header>
+
+  <!--Barra toolbar-->
+  <ion-toolbar color="#2C1C3E">
+    <ion-buttons style="color:white" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="color:white">
+      Usuario
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Empezamos donde meteremos la informacion-->
+<ion-content color="#140B1C" class="fixed-scroll">
+  <div class="contenedor">
+    <ion-grid>
+
+      <img class="circle-pic" src="assets/fotos/logo.png" />
+      <ion-row>
+        <ion-col *ngFor="let item of listadoPanel;let i = index" text-center style="color:white">
+          ¡Bienvenido {{item.name}}!
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="correo" text-center style="color:white">
+          Te has registrado con el correo: {{userEmail}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <p text-center style="color:white">Gracias por registrate en Insert Coin. Una vez que te registraste e iniciaste
+      sesión, podrás tener más funciones que los que inicien en modo invitado.  ¡A disdrutar!</p>
+  </div>
+
+</ion-content>
+<ion-footer color="#140B1C">
+  <ion-toolbar color="secondary" color="#140B1C" (click)="logout()">
+    <ion-title class="desconectar" >Desconectarse</ion-title>
+  </ion-toolbar>
+</ion-footer>

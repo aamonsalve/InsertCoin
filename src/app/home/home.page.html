@@ -1,14 +1,44 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
+ 
+   <!--Barra toolbar-->
+  <ion-toolbar color="#2C1C3E">
+    <ion-buttons style="color:white" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="color:white" >
+      Inicio
     </ion-title>
+    <ion-buttons slot="end" routerLink="/user">
+      <img class ="user" src="/assets/fotos/usuario.png" />
+    </ion-buttons>
   </ion-toolbar>
+
+
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<!--Empezamos donde meteremos la informacion-->
+<ion-content  color="#140B1C" class="card-background-page">
+
+      <!--Plataformas-->
+      <ion-card (click)="seccionPs4()">
+        <img  class="fotos" src="/assets/fotos/playPrinci.gif" />
+        <div class="card-title">PlayStation</div>
+      </ion-card>
+
+      <ion-card (click)="seccionXbox()">
+        <img class="fotos"  src="/assets/fotos/xboxPrinci.gif" />
+        <div class="card-title">XBox</div>
+      </ion-card>
+    
+      <ion-card (click)="seccionNintendo()">
+        <img class="fotos" src="/assets/fotos/nintendoPrinci.gif" />
+        <div class="card-title">Nintendo</div>
+      </ion-card>
+
+   
 </ion-content>
+<ion-footer  color="#2C1C3E">
+  <ion-toolbar  color="#2C1C3E">
+    <ion-title  style="color:white">Plataformas</ion-title>
+  </ion-toolbar>
+</ion-footer>

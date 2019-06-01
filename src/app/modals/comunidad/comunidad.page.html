@@ -1,0 +1,62 @@
+<ion-header>
+
+  <!--Barra toolbar-->
+  <ion-toolbar color="#2C1C3E">
+    <ion-button slot="start" fill="clear" (click)="atras()">
+      <ion-icon style="color:#fff; font-size: 25px" name="arrow-round-back"></ion-icon>
+    </ion-button>
+    <ion-title style="color:white">
+      {{this.titulo}}
+    </ion-title>
+  </ion-toolbar>
+
+
+
+</ion-header>
+
+<!--Empezamos donde meteremos la informacion-->
+<ion-content color="#140B1C" class="card-background-page">
+
+  <div *ngIf="comunidad" class="lista">
+    <ion-list>
+
+      <ion-item-sliding id="item100" *ngFor="let mensaje of comunidades?.mensajes">
+        <ion-item color="#003350">
+          <ion-card class="fixed-scroll" >
+            <ion-card-header>
+              <ion-card-subtitle >{{mensaje.autor}}</ion-card-subtitle>
+              <ion-item-divider>
+              </ion-item-divider> 
+            </ion-card-header>
+            <img   src="{{mensaje.foto}}" />
+            <ion-card-content>
+              <p>{{mensaje.mensaje}}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="borrarMensaje( mensaje.autor, mensaje.mensaje, mensaje.id, mensaje.foto)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+
+</ion-content>
+<ion-footer color="#003350">
+    <ion-item class="footer" color="#2C1C3E">
+    <ion-avatar slot="start" >
+        <ion-img #mifoto [src]="galeria"></ion-img>
+      </ion-avatar>
+    <ion-textarea (keyup.enter)="cerrar()"  [(ngModel)]="mensajeEnviar"></ion-textarea>
+    <ion-button class="photo" color="blue" (click)="fotoGaleria()">
+        <ion-icon name="photos"></ion-icon>
+      </ion-button>
+    <ion-button class="enviar" color="blue" (click)="enviarMensaje()">
+      <ion-icon name="send"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-footer>

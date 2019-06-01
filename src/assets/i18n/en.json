@@ -1,0 +1,14 @@
+{
+    "idioma": "Language",
+    "Principal": "Main",
+    "Usuario": "User",
+    "Desconectarse": "Logout",
+    "Inicio Sesion": "Login",
+    "Inicia Sesion con Google": "Log in with Google",
+    "Opciones":"Option",
+    "internet":"Good! You are online on ",
+    "nointernet":"Oups! You are offline",
+    "Español":"Spanish",
+    "Inglés": "English",
+    "err": "Error: The email address is already in use by another account."
+}

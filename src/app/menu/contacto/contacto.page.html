@@ -1,0 +1,41 @@
+<ion-header>
+
+  <!--Barra toolbar-->
+  <ion-toolbar color="#2C1C3E">
+    <ion-buttons style="color:white" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="color:white">
+      Contacto
+    </ion-title>
+  </ion-toolbar>
+
+
+</ion-header>
+
+<!--Empezamos donde meteremos la informacion-->
+<ion-content color="#140B1C" class="fixed-scroll">
+
+  <div class="contacto" class="fixed-scroll">
+
+
+    <br />
+    <ion-label stacked>Enviar a: </ion-label>
+    <ion-input type="text" placeholder="Correo de asistencia al usuario" [(ngModel)]="to" readonly="readonly">
+    </ion-input>
+    <br />
+
+    <ion-label stacked>Asunto: </ion-label>
+    <ion-input type="text" placeholder="Poner mejora o problema" [(ngModel)]="subject" ></ion-input>
+    <br />
+    <ion-label>Contenido: </ion-label>
+    <ion-textarea rows="6" cols="20" placeholder="Explicación del problema o mejora..." [(ngModel)]="body">
+    </ion-textarea>
+    
+    <p class="informacion">Para utilizar este apartado se necesita tener instalado una app de email.</p>
+
+    <ion-button (click)="send()" expand="block">Enviar</ion-button>
+
+  </div>
+
+</ion-content>

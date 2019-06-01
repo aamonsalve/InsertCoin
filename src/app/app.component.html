@@ -1,3 +1,28 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-header>
+        <ion-toolbar color="#2C1C3E">
+          <ion-title style="color:white">Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content color="#140B1C">
+        <ion-list color="#140B1C">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages" color="#140B1C">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" color="#140B1C">
+              <ion-icon class="menu" style="color:white" slot="start" [name]="p.icon"></ion-icon>
+              <ion-label style="color:white">
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        <ion-select placeholder="Idioma" (ionChange)="cambiarIdioma($event)" style="color:white">
+          <ion-select-option style="color:white" value="en">{{"Inglés" | translate }}</ion-select-option>
+          <ion-select-option style="color:white" value="es" selected="selected">{{"Español" | translate }}</ion-select-option>
+        </ion-select>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

@@ -1,0 +1,45 @@
+ion-content {
+    background-color: #0c610c   !important;
+    background-size: 100% 100%; 
+}
+  
+  
+ion-toolbar{ 
+      background-color: #107c10 !important;
+}
+    
+     
+ion-title{
+      margin-right: 25px !important;
+      color:white !important;
+      font-weight: bold ;
+      text-align: center;
+      font-size: 1.5em !important;
+}
+
+ion-icon{
+      color:white !important;
+}
+
+.atras{
+      color:white !important;
+      width: 35px;
+    height: 27px;
+    }
+
+ion-card-title{font-weight: bold !important;
+      font-size: 1.7em !important;}
+    p{
+      font-weight: bold !important;
+      font-size: 1.2em !important;
+    }
+
+    iframe { margin:0; padding:0; height:100% !important ; }
+    iframe { display:block; width:100% !important; border:none; }
+    iframe:focus { 
+      outline: none;
+    }
+    
+    iframe[seamless] { 
+      display: block;
+    }

@@ -1,0 +1,91 @@
+<ion-header>
+
+  <!--Barra toolbar-->
+  <ion-toolbar color="#0f750f">
+    <ion-buttons style="color:#fff" slot="start">
+      <ion-icon class="atras" name="arrow-back" (click)="atras()"></ion-icon>
+    </ion-buttons>
+    <ion-title style="color:#fff">
+      <ion-icon name="logo-xbox"></ion-icon>
+      XBox
+    </ion-title>
+  </ion-toolbar> 
+
+  <!--Buscador-->
+  <ion-searchbar style="background-color: #0c610c" class="buscador" (ionChange)="buscar($event)"
+  (keyup.enter)="cerrar()" placeholder="Buscar" animated></ion-searchbar>
+
+  <!-- Parte de Las categorias-->
+  <ion-segment [(ngModel)]="category" (ionChange)="slides.slideTo(category)" style="background-color: #107c10">
+    <ion-segment-button layout="icon-start" value="0" style="--padding-end:-3px;--padding-start:0px" style="color:#fff">
+      <ion-icon name="paper"></ion-icon>
+      <ion-label>Noticias</ion-label>
+    </ion-segment-button>
+    <ion-segment-button layout="icon-start" value="1" style="--padding-end:0px;--padding-start:0px" style="color:#fff">
+      <ion-icon name="logo-game-controller-b"></ion-icon>
+      <ion-label>Juegos </ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!--Barrita con la que nos moveremos por las diferentes categorias-->
+  <div id='indicator' class="SwipedTabs-indicatorSegment" [ngStyle]="{'width.%': (103.5/this.tabs.length)}"
+    style="margin-top:-4px"></div>
+
+  <!--Se acaba el header-->
+</ion-header>
+
+<!--Empezamos donde meteremos la informacion-->
+<ion-content class="card-background-page">
+
+  <!--Actualizar Pagina-->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content id="spinner" pullingIcon="arrow-dropdown" pullingText="Suelta Para Actualizar"
+      refreshingSpinner="lines" refreshingText="Actualizando">
+    </ion-refresher-content>
+  </ion-refresher>
+
+    <!--Dividiremos en las categorias-->
+    <ion-slides color="primary" #slides
+    (ionSlideTransitionStart)="updateIndicatorPosition();updateCat(slides.getActiveIndex())"
+    (ionSlideWillChange)="updateIndicatorPosition()" (ionSlideDidChange)="updateIndicatorPosition()" #SwipedTabsSlider
+    (ionSlideDrag)="animateIndicator($event)">
+
+    <!--Primer Slide - Noticias-->
+    <ion-slide class="fixed-scroll">
+      <ion-card *ngFor="let item of listadoPanelXboxNoticias;let i = index">
+        <img src="{{item.foto}}" />
+        <ion-card-content (click)="abrirModal(item.id, item.titulo, item.foto, item.video, item.descripcionC)">
+          <ion-card-title style="color:#fff">
+            {{item.titulo}}
+          </ion-card-title>
+          <p class="ion-text-justify" style="color:#fff">
+            {{item.descripcionP}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <!--Segundo Slide - Juegos-->
+    <ion-slide class="fixed-scroll">
+
+      <ion-card *ngFor="let item of listadoPanelXboxJuegos;let i = index">
+        <img src="{{item.foto}}" />
+        <ion-card-content (click)="abrirModal(item.id, item.titulo, item.foto, item.video, item.descripcionC)">
+          <ion-card-title style="color:#fff">
+            {{item.titulo}}
+          </ion-card-title>
+          <p class="ion-text-justify" style="color:#fff">
+            {{item.descripcionP}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-slide>
+ 
+
+
+    <!--Se termina el Slide-->
+  </ion-slides>
+
+  <!--Se cierra el Contenedor-->
+</ion-content>

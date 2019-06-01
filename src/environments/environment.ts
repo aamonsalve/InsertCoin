@@ -3,7 +3,27 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  currentLanguages: ['es', 'en'],
+  defaultLanguage: "es",
+  firebaseConfig: {
+    apiKey: "AIzaSyCGS6PaWDSzESTYmCK_Pcuyr61zXoEQpY4",
+    authDomain: "insert-coin-68f30.firebaseapp.com",
+    databaseURL: "https://insert-coin-68f30.firebaseio.com",
+    projectId: "insert-coin-68f30",
+    storageBucket: "insert-coin-68f30.appspot.com",
+    messagingSenderId: "531734210797",
+    ps4NoticiasColection:"playNoticias",
+    ps4JuegosColection:"playJuegos",
+    xboxNoticiasColection:"xboxNoticias",
+    xboxJuegosColection:"xboxJuegos",
+    nintendoNoticiasColection:"nintendoNoticias",
+    nintendoJuegosColection:"nintendoJuegos",
+    usuariosColection:"usuarios",
+    comunidadesColection:"comunidades",
+    defaultImagen:"./assets/fotos/logo.png",  //imagen por defecto
+    }
+     
 };
 
 /*

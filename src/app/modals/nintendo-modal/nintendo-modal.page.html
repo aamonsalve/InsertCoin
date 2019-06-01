@@ -1,0 +1,38 @@
+<ion-header>
+
+  <!--Barra toolbar-->
+  <ion-toolbar color="#c40111">
+    <ion-buttons style="color:#fff" slot="start">
+      <ion-icon class="atras" name="arrow-back" (click)="atras()"></ion-icon>
+    </ion-buttons>
+    <ion-title style="color:#fff">
+      <ion-icon name="logo-game-controller-a"></ion-icon>
+      Nintendo
+    </ion-title>
+  </ion-toolbar>
+
+
+
+  <!--Se acaba el header-->
+</ion-header>
+
+<!--Empezamos donde meteremos la informacion-->
+<ion-content color="#a80311">
+
+  <ion-card >
+  <iframe [src]="getSafeUrl()"  width="640" height="360" frameborder="0"
+  webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+
+  <ion-card-content>
+    <ion-card-title style="color:#fff">
+      {{this.titulo}}
+    </ion-card-title>
+    <p class="ion-text-justify" style="color:#fff">
+      {{this.descripcionC}}
+    </p>
+    <img src="{{this.foto}}" />
+  </ion-card-content>
+</ion-card>
+  <!--Se cierra el Contenedor-->
+</ion-content>
