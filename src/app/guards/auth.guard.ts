@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
   constructor(private AFauth : AngularFireAuth,
     private router: Router){}
 
+    //funcion que sirve para que te deje entrar a las paginas si estas registrado, si no te envia a la pagina de iniciar sesion
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

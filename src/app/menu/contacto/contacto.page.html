@@ -6,7 +6,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title style="color:white">
-      Contacto
+      {{"Contacto" | translate}}
     </ion-title>
   </ion-toolbar>
 
@@ -20,21 +20,21 @@
 
 
     <br />
-    <ion-label stacked>Enviar a: </ion-label>
-    <ion-input type="text" placeholder="Correo de asistencia al usuario" [(ngModel)]="to" readonly="readonly">
+    <ion-label stacked>{{"Enviar a:" | translate}}</ion-label>
+    <ion-input type="text" placeholder="{{'Correo de asistencia al usuario' | translate}}" [(ngModel)]="to" readonly="readonly">
     </ion-input>
     <br />
 
-    <ion-label stacked>Asunto: </ion-label>
-    <ion-input type="text" placeholder="Poner mejora o problema" [(ngModel)]="subject" ></ion-input>
+    <ion-label stacked>{{"Asunto:" | translate}}</ion-label>
+    <ion-input type="text" placeholder="{{'Poner mejora o problema' | translate}}" [(ngModel)]="subject" ></ion-input>
     <br />
-    <ion-label>Contenido: </ion-label>
-    <ion-textarea rows="6" cols="20" placeholder="Explicación del problema o mejora..." [(ngModel)]="body">
+    <ion-label>{{"Contenido:" | translate}}</ion-label>
+    <ion-textarea rows="6" cols="20" placeholder="{{'Explicación del problema o mejora...' | translate}}" [(ngModel)]="body">
     </ion-textarea>
     
-    <p class="informacion">Para utilizar este apartado se necesita tener instalado una app de email.</p>
+    <p class="informacion">{{"Para utilizar este apartado se necesita tener instalado una app de email." | translate}}</p>
 
-    <ion-button (click)="send()" expand="block">Enviar</ion-button>
+    <ion-button (click)="send()" expand="block">{{"Enviar" | translate}}</ion-button>
 
   </div>
 

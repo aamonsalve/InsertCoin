@@ -4,7 +4,7 @@
   <ion-toolbar color="#003791">
 
     <ion-title style="color:#fff">
-      Inicio Sesión
+      {{ "Inicio Sesión" | translate}}
     </ion-title>
   </ion-toolbar>
   <!--Se acaba el header-->
@@ -19,7 +19,7 @@
   <form class="form" [formGroup]="validations_form">
     
 
-      <ion-label position="floating" class="fixed-scroll"> Correo electrónico</ion-label>
+      <ion-label position="floating" class="fixed-scroll">{{ "Correo electrónico" | translate}} </ion-label>
       <ion-input type="text" [(ngModel)]="email" formControlName="email" name="email"></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.email">
@@ -31,7 +31,7 @@
       </div>
 
 
-      <ion-label position="floating" class="fixed-scroll"> Contraseña</ion-label>
+      <ion-label position="floating" class="fixed-scroll">{{ "Contraseña" | translate}}</ion-label>
       <ion-input [(ngModel)]="password" formControlName="password" type="password" name="password"></ion-input>
 
       <div class="validation-errors">
@@ -45,14 +45,13 @@
       
 
       <br>
-      <ion-button (click)="login()" expand="block" [disabled]="!validations_form.valid">Entrar</ion-button>
+      <ion-button (click)="login()" expand="block" [disabled]="!validations_form.valid">{{ "Inicio Sesión" | translate}}</ion-button>
       <label class="error-message">{{errorMessage}}</label>
   </form>
 
   <br>
-  <ion-label>¿Quieres Registrarte?</ion-label><a text-center routerLink="/registro" class="crear"> Crear
-    cuenta</a><br />
-  <p class="invitado" routerLink="/home">Modo Invitado</p>
+  <ion-label>{{ "¿Quieres Registrarte?" | translate}}</ion-label><a text-center routerLink="/registro" class="crear"> {{ "Crear cuenta" | translate}}</a><br />
+  <p class="invitado" routerLink="/home">{{"Modo Invitado"  | translate}}</p>
   </div>
 
 

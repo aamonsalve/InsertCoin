@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AcercaDePage } from './acerca-de.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -16,6 +17,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    
+    TranslateModule,
     CommonModule,
     FormsModule,
     IonicModule,

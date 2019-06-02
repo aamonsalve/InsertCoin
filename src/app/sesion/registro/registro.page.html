@@ -4,7 +4,7 @@
   <ion-toolbar color="#003791">
    
     <ion-title style="color:#fff">
-      Registrarte
+      {{ "Registrarte" | translate}}
     </ion-title>
   </ion-toolbar>
   <!--Se acaba el header-->
@@ -18,7 +18,7 @@
   <div class="login">
     <form class="form" [formGroup]="validations_form">
  
-      <ion-label position="floating" > Nombre</ion-label>
+      <ion-label position="floating" > {{ "Nombre" | translate}}</ion-label>
       <ion-input type="text" formControlName="name" [(ngModel)]="name" name="name"></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.name">
@@ -28,7 +28,7 @@
           </ng-container>
         </div>
 
-      <ion-label position="floating" > Correo electrónico</ion-label>
+      <ion-label position="floating" >{{ "Correo electrónico" | translate}} </ion-label>
       <ion-input type="text" [(ngModel)]="email" formControlName="email" name="email"></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.email">
@@ -38,7 +38,7 @@
         </ng-container>
       </div>
 
-      <ion-label position="floating" > Contraseña</ion-label>
+      <ion-label position="floating" > {{ "Contraseña" | translate}}</ion-label>
       <ion-input [(ngModel)]="password" type="password" formControlName="password"  name="password"></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.password">
@@ -48,12 +48,12 @@
         </ng-container>
       </div>
     <br>
-    <ion-button [disabled]="!validations_form.valid" (click)="Registrar()" expand="block">Registrarte</ion-button>
+    <ion-button [disabled]="!validations_form.valid" (click)="Registrar()" expand="block">{{ "Registrarte" | translate}}</ion-button>
     <label class="error-message">{{errorMessage}}</label>
     <label class="success-message">{{successMessage}}</label>
     <br>
     </form>
-    <ion-label>¿Tienes Cuenta?</ion-label><a text-center routerLink="/inicio-sesion" class="crear"> Inicia Sesión</a>
+    <ion-label>{{ "¿Tienes Cuenta?" | translate}}</ion-label><a text-center routerLink="/inicio-sesion" class="crear">   {{ "Inicio Sesión" | translate}}</a>
   </div>
 
 

@@ -3,7 +3,7 @@ import { IonSlides, IonInfiniteScroll, LoadingController, ModalController } from
 import { Router } from '@angular/router';
 import { Ps4Service } from 'src/app/servicios/ps4.service';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
-import { Ps4ModalPage } from '../../modals/ps4-modal/ps4-modal.page'; 
+import { Ps4ModalPage } from '../../modals/ps4-modal/ps4-modal.page';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 
@@ -18,7 +18,7 @@ export class Ps4Page {
   @ViewChild('SwipedTabsSlider') SwipedTabsSlider: IonSlides;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-enlace:string
+  enlace: string
   private tabs = ["selectTab(0)", "selectTab(1)"];
   private category: any = "0";
   private ntabs = 2;
@@ -39,7 +39,7 @@ enlace:string
     private Ps4: Ps4Service,
     private sanitizer: DomSanitizer,
     private keyboard: Keyboard,
-    private modalContoller:ModalController) {
+    private modalContoller: ModalController) {
     this.initializeItems();
   }
 
@@ -119,7 +119,7 @@ enlace:string
   }
 
   /**
-     * Función para llamar a filtrar, igualamos el destino con lo que se ha escrito, y actualizamos la pagina con ese destino.
+     * Función para llamar a filtrar
      * @param busqueda 
      */
   buscar(busqueda) {
@@ -128,9 +128,11 @@ enlace:string
     this.actualizarPage(this.Titulo, this.TituloJuegos);
   }
 
+
   /**
-     * Actualizamos la pagina de ps4, stema y xbox.
-     * 
+     * Actualiza la pagina segun si  le pasamos un parametro o no
+     * @param Titulo 
+     * @param TituloJuegos 
      */
   actualizarPage(Titulo: string, TituloJuegos: string) {
 
@@ -153,10 +155,10 @@ enlace:string
 
   }
 
-
-
-
-
+  /**
+      * funcion para refrescar la ventana cunado hagamos la funcion
+      * @param refresher 
+      */
   doRefresh(refresher) {
     this.Ps4.leePs4Noticias(this.Titulo)
       .then(querySnapshot => {
@@ -189,13 +191,23 @@ enlace:string
     this.router.navigate(["/home"]);
   }
 
-    /**
-   * Oculta el teclado nativo al pulsar enter.
-   */
-  cerrar(){
+  /**
+ * Oculta el teclado nativo al pulsar enter.
+ */
+  cerrar() {
     this.keyboard.hide();
   }
 
+  /**
+  * alert que nos muestra que esta cargando
+  * @param msg 
+  */
+  async presentLoading(msg) {
+    let myloading = await this.loadingController.create({
+      message: msg
+    });
+    return await myloading.present();
+  }
 
 
   /**
@@ -210,24 +222,24 @@ enlace:string
   abrirModal(id, titulo, foto, video, descripcionC) {
     this.presentModal(id, titulo, foto, video, descripcionC);
   }
-  
 
-/**
-   * Creamos el modal con los datos a mostrar
-   * @param id 
-   * @param titulo 
-   * @param foto 
-   * @param video 
-   * @param descripcionC
-   */
+
+  /**
+     * Creamos el modal con los datos a mostrar
+     * @param id 
+     * @param titulo 
+     * @param foto 
+     * @param video 
+     * @param descripcionC
+     */
 
   async presentModal(id: any, titulo: any, foto: any, video: any, descripcionC: any) {
     const modal = await this.modalContoller.create({
       component: Ps4ModalPage,
-     
+
       componentProps: { id: id, titulo: titulo, foto: foto, video: video, descripcionC: descripcionC }
     });
-     
+
     return await modal.present();
   }
 

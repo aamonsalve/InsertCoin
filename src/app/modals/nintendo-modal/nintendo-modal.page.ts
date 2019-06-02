@@ -34,7 +34,7 @@ export class NintendoModalPage implements OnInit {
   ngOnInit() {
   }
    /**
-   * Método que nos devuelve a la pagina anterior y cuando le demos al boton nos vibre.
+   * Método que nos devuelve a la pagina anterior, cerrando el modal
    */
   atras(){
     this.modalController.dismiss(null, undefined);

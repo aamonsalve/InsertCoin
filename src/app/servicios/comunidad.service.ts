@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import {environment} from '../../environments/environment';
-import {mensajes} from 'src/app/servicios/mensaje.service';
+import { environment } from '../../environments/environment';
+import { mensajes } from 'src/app/servicios/mensaje.service';
 import { firestore } from 'firebase';
 import { parseIntAutoRadix } from '@angular/common/src/i18n/format_number';
 
@@ -20,66 +20,97 @@ export class ComunidadService {
 
 
   /** 
-     * Leemos los datos de la base de datos de la tabla Avion
+     * Leemos los datos de la base de datos 
      * @param titulo
      */
-    leerComunidades(titulo: String) {
-      if (titulo !== "") {
-  
-        //compara letra por letra con los datos titulo de la base de datos y los que introducimos en el ion-search
-        var strlength = titulo.length;
-        var strFrontCode = titulo.slice(0, strlength - 1);
-        var strEndCode = titulo.slice(strlength - 1, titulo.length);
-        var startcode = titulo;
-        console.log(startcode);
-        var endcode = strFrontCode + String.fromCharCode(strEndCode.charCodeAt(0) + 1);
-        return this.miComunidad.ref.where('titulo', '>=', startcode).where('titulo', '<', endcode).get();
-  
-      }
-      else {
-        //si no hemos introducido ningun titulo nos muestra todos los campos de nuestra base de datos
-        return this.miComunidad.ref.get();
-      }
-    }
+  leerComunidades(titulo: String) {
+    if (titulo !== "") {
 
-    crearComunidad(Titulo: string, autor: string, Descripcion:string)
-    {
-      
-      this.miComunidad.doc(Titulo).set({
-        titulo: Titulo,
-        descripcion: Descripcion,
-        autor: autor,
-        foto: "http://static.libsyn.com/p/assets/2/5/7/9/2579e4a10404f49f/Insert_Coin_History_-_Square_Logo_-_Rainbow_Asteroids_-_1600_x_1600_-_iTunes_-_v2_-_RGB.jpg"
-      });
+      //compara letra por letra con los datos titulo de la base de datos y los que introducimos en el ion-search
+      var strlength = titulo.length;
+      var strFrontCode = titulo.slice(0, strlength - 1);
+      var strEndCode = titulo.slice(strlength - 1, titulo.length);
+      var startcode = titulo;
+      console.log(startcode);
+      var endcode = strFrontCode + String.fromCharCode(strEndCode.charCodeAt(0) + 1);
+      return this.miComunidad.ref.where('titulo', '>=', startcode).where('titulo', '<', endcode).get();
 
     }
-
-    guardarMensaje(mensajes : mensajes, id: string){
-
-
-      this.miComunidad.doc(id).update({
-        mensajes : firestore.FieldValue.arrayUnion(mensajes),
-      })
+    else {
+      //si no hemos introducido ningun titulo nos muestra todos los campos de nuestra base de datos
+      return this.miComunidad.ref.get();
     }
+  }
 
-    
-  getMensajes(id : string){
+
+  /**
+  * funcion para crear una comunidad 
+  * @param Titulo
+  * @param autor
+  * @param Descripcion 
+  */
+
+  crearComunidad(Titulo: string, autor: string, Descripcion: string) {
+
+    this.miComunidad.doc(Titulo).set({
+      titulo: Titulo,
+      descripcion: Descripcion,
+      autor: autor,
+      foto: "http://static.libsyn.com/p/assets/2/5/7/9/2579e4a10404f49f/Insert_Coin_History_-_Square_Logo_-_Rainbow_Asteroids_-_1600_x_1600_-_iTunes_-_v2_-_RGB.jpg"
+    });
+
+  }
+
+
+  /**
+  * guardamos el mensaje que enviamos
+  * @param mensajes
+  * @param id 
+  */
+
+  guardarMensaje(mensajes: mensajes, id: string) {
+
+
+    this.miComunidad.doc(id).update({
+      mensajes: firestore.FieldValue.arrayUnion(mensajes),
+    })
+  }
+
+  /**
+  * recuperamos todos los mensajes
+  * @param id 
+  */
+
+  getMensajes(id: string) {
     return this.fireStore.collection('comunidades').doc(id).valueChanges()
   }
 
 
-  borrarComunidad(id : string){
+  /**
+    * borramos una comunidad especifica
+    * @param id 
+    */
+
+  borrarComunidad(id: string) {
     this.miComunidad.doc(id).delete();
-    
+
   }
 
-  borrarMensaje(id : string, mensaje: string, autor : string, foto : string){
-    
+  /**
+    * borramos el mensaje seleccionado de una comunidad
+    * @param id
+    * @param mensaje
+    * @param autor
+    * @param foto 
+    */
+
+  borrarMensaje(id: string, mensaje: string, autor: string, foto: string) {
+
     this.miComunidad.doc(id).update({
-      "mensajes": firestore.FieldValue.arrayRemove({"autor": autor, "foto": foto ,"mensaje": mensaje})
+      "mensajes": firestore.FieldValue.arrayRemove({ "autor": autor, "foto": foto, "mensaje": mensaje })
 
     })
 
   }
-  
+
 }

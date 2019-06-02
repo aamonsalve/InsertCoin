@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { InicioSesionPage } from './inicio-sesion.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { UserPage } from './user.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     IonicModule,

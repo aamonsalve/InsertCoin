@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { LoadingController,  } from '@ionic/angular';
+import { LoadingController, } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from "@angular/fire/auth";
 
@@ -13,11 +13,11 @@ import { AngularFireAuth } from "@angular/fire/auth";
 })
 export class UserPage implements OnInit {
 
-  
+
   listado = [];
   listadoPanel = [];
   userEmail: string;
- 
+
   constructor(
     private navCtrl: NavController,
     private authService: AuthService,
@@ -27,9 +27,9 @@ export class UserPage implements OnInit {
   ) {
     this.initializeItems();
   }
- 
-  ngOnInit(){
-    if(this.authService.email()){
+
+  ngOnInit() {
+    if (this.authService.email()) {
       this.userEmail = this.authService.email().email;
     }
     this.nombre();
@@ -55,6 +55,13 @@ export class UserPage implements OnInit {
       this.loadingController.dismiss();
     });
   }
+
+
+
+  /**
+    * funcion de alert mostrando que esta cargando
+    * @param msg
+    */
   async presentLoading(msg) {
     let myloading = await this.loadingController.create({
       message: msg
@@ -62,6 +69,11 @@ export class UserPage implements OnInit {
     return await myloading.present();
   }
 
+
+
+  /**
+    * funcion para desconectarnos de la cuenta
+    */
   logout() {
     this.AFauth.auth.signOut().then(() => {
       this.router.navigate(['/desconectar']);

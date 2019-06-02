@@ -1,4 +1,4 @@
-import { Component,  ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonSlides, IonInfiniteScroll, LoadingController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { XboxService } from 'src/app/servicios/Xbox.service';
@@ -15,32 +15,33 @@ import { XboxModalPage } from 'src/app/modals/xbox-modal/xbox-modal.page';
 export class XboxPage {
   @ViewChild('SwipedTabsSlider') SwipedTabsSlider: IonSlides;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-  
+
   private tabs = ["selectTab(0)", "selectTab(1)"];
   private category: any = "0";
   private ntabs = 2;
   private SwipedTabsIndicator: any = null;
- 
-  Titulo: string ="";
-  TituloJuegos :  string ="";
-  listadoXboxNoticias=[];
-  listadoPanelXboxNoticias=[];
-  listadoXboxJuegos=[];
-  listadoPanelXboxJuegos=[];
- 
+
+  Titulo: string = "";
+  TituloJuegos: string = "";
+  listadoXboxNoticias = [];
+  listadoPanelXboxNoticias = [];
+  listadoXboxJuegos = [];
+  listadoPanelXboxJuegos = [];
+
   constructor(
-    private router: Router, 
-    private modalContoller:ModalController,
-    private Xbox:XboxService,
+    private router: Router,
+    private modalContoller: ModalController,
+    private Xbox: XboxService,
+    private loadingController: LoadingController,
     private keyboard: Keyboard
 
-  ) { 
+  ) {
     this.initializeItems();
   }
 
- /**
-   * Se ejecuta cuando la página está a punto de entrar y convertirse en la página activa.
-   */
+  /**
+    * Se ejecuta cuando la página está a punto de entrar y convertirse en la página activa.
+    */
   ionViewWillEnter() {
     this.category = "0";
     this.SwipedTabsSlider.length().then(l => {
@@ -58,11 +59,11 @@ export class XboxPage {
       this.category = +this.category;
     });
   }
- 
 
-  initializeItems(){
-    this.listadoPanelXboxNoticias=this.listadoXboxNoticias;
-    this.listadoPanelXboxJuegos=this.listadoPanelXboxJuegos;
+
+  initializeItems() {
+    this.listadoPanelXboxNoticias = this.listadoXboxNoticias;
+    this.listadoPanelXboxJuegos = this.listadoPanelXboxJuegos;
   }
 
 
@@ -88,14 +89,14 @@ export class XboxPage {
   }
 
 
-/**
-   * Se ejecuta cuando la página ha entrado completamente y ahora es la página activa.
-   * Carga los datos de todas las paginas y ademas de la rayita y de un loading hasta que cargue los datos
-   */
+  /**
+     * Se ejecuta cuando la página ha entrado completamente y ahora es la página activa.
+     * Carga los datos de todas las paginas y ademas de la rayita y de un loading hasta que cargue los datos
+     */
   ionViewDidEnter() {
-    
-    /*this.presentLoading("Cargando");*/
-   
+
+    this.presentLoading("Cargando");
+
     this.SwipedTabsIndicator = document.getElementById("indicator");
 
     this.Xbox.leeXboxNoticias(this.Titulo).then((querySnapshot) => {
@@ -104,7 +105,7 @@ export class XboxPage {
         this.listadoXboxNoticias.push({ id: doc.id, ...doc.data() });
       });
       this.listadoPanelXboxNoticias = this.listadoXboxNoticias;
-     /* this.loadingController.dismiss();*/
+      this.loadingController.dismiss();
     });
 
     this.Xbox.leeXboxJuegos(this.TituloJuegos).then((querySnapshot) => {
@@ -113,14 +114,14 @@ export class XboxPage {
         this.listadoXboxJuegos.push({ id: doc.id, ...doc.data() });
       });
       this.listadoPanelXboxJuegos = this.listadoXboxJuegos;
-     /* this.loadingController.dismiss();*/
+      this.loadingController.dismiss();
     });
-}
-/**
-   * Función para llamar a filtrar, igualamos el destino con lo que se ha escrito, y actualizamos la pagina con ese destino.
-   * @param busqueda 
-   */
-  buscar(busqueda){
+  }
+  /**
+     * Función para llamar a filtrar
+     * @param busqueda 
+     */
+  buscar(busqueda) {
     this.Titulo = busqueda.srcElement.value;
     this.TituloJuegos = busqueda.srcElement.value;
     this.actualizarPage(this.Titulo, this.TituloJuegos);
@@ -128,10 +129,11 @@ export class XboxPage {
 
 
 
-/**
-   * Actualizamos la pagina de Xbox, stema y Xbox.
-   * 
-   */
+  /**
+       * Actualiza la pagina segun si  le pasamos un parametro o no
+       * @param Titulo 
+       * @param TituloJuegos 
+       */
   actualizarPage(Titulo: string, TituloJuegos: string) {
 
     this.Xbox.leeXboxNoticias(Titulo).then((querySnapshot) => {
@@ -141,23 +143,28 @@ export class XboxPage {
       });
       this.listadoPanelXboxNoticias = this.listadoXboxNoticias;
     });
-     /* this.loadingController.dismiss();*/
-     this.Xbox.leeXboxJuegos(TituloJuegos).then((querySnapshot) => {
+    /* this.loadingController.dismiss();*/
+    this.Xbox.leeXboxJuegos(TituloJuegos).then((querySnapshot) => {
       this.listadoXboxJuegos = [];
       querySnapshot.forEach((doc) => {
         this.listadoXboxJuegos.push({ id: doc.id, ...doc.data() });
       });
       this.listadoPanelXboxJuegos = this.listadoXboxJuegos;
-     /* this.loadingController.dismiss();*/
+      /* this.loadingController.dismiss();*/
     });
-  
 
-   
+
+
   }
+
+  /**
+    * funcion para refrescar la ventana cunado hagamos la funcion
+    * @param refresher 
+    */
 
 
   doRefresh(refresher) {
-      this.Xbox.leeXboxNoticias(this.Titulo)
+    this.Xbox.leeXboxNoticias(this.Titulo)
       .then(querySnapshot => {
         this.listadoXboxNoticias = [];
         querySnapshot.forEach((doc) => {
@@ -170,7 +177,7 @@ export class XboxPage {
         refresher.target.complete();
       });
 
-      this.Xbox.leeXboxJuegos(this.TituloJuegos)
+    this.Xbox.leeXboxJuegos(this.TituloJuegos)
       .then(querySnapshot => {
         this.listadoXboxJuegos = [];
         querySnapshot.forEach((doc) => {
@@ -185,16 +192,29 @@ export class XboxPage {
   }
 
 
-  atras(){
+  atras() {
     this.router.navigate(["/home"]);
-    
+
   }
-   /**
-   * Oculta el teclado nativo al pulsar enter.
-   */
-  cerrar(){
+  /**
+  * Oculta el teclado nativo al pulsar enter.
+  */
+  cerrar() {
     this.keyboard.hide();
   }
+
+
+  /**
+* alert que nos muestra que esta cargando
+* @param msg 
+*/
+  async presentLoading(msg) {
+    let myloading = await this.loadingController.create({
+      message: msg
+    });
+    return await myloading.present();
+  }
+
 
 
   /**
@@ -209,24 +229,24 @@ export class XboxPage {
   abrirModal(id, titulo, foto, video, descripcionC) {
     this.presentModal(id, titulo, foto, video, descripcionC);
   }
-  
 
-/**
-   * Creamos el modal con los datos a mostrar
-   * @param id 
-   * @param titulo 
-   * @param foto 
-   * @param video 
-   * @param descripcionC
-   */
+
+  /**
+     * Creamos el modal con los datos a mostrar
+     * @param id 
+     * @param titulo 
+     * @param foto 
+     * @param video 
+     * @param descripcionC
+     */
 
   async presentModal(id: any, titulo: any, foto: any, video: any, descripcionC: any) {
     const modal = await this.modalContoller.create({
-      component: XboxModalPage ,
-     
+      component: XboxModalPage,
+
       componentProps: { id: id, titulo: titulo, foto: foto, video: video, descripcionC: descripcionC }
     });
-    
+
     return await modal.present();
   }
 

@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 })
 export class Ps4Service {
 
-  mips4Noticias: any; 
+  mips4Noticias: any;
   mips4Juegos: any;
 
   constructor(private fireStore: AngularFirestore) {
@@ -15,7 +15,7 @@ export class Ps4Service {
       this.mips4Juegos = fireStore.collection<any>(environment.firebaseConfig.ps4JuegosColection)
   }
   /**
-     * Leemos los datos de la base de datos de la tabla Avion
+     * Leemos los datos de la base de datos 
      * @param Titulo
      */
   leePs4Noticias(Titulo: String) {
@@ -37,7 +37,7 @@ export class Ps4Service {
   }
 
   /**
-     * Leemos los datos de la base de datos de la tabla Avion
+     * Leemos los datos de la base de datos 
      * @param Titulo
      */
   leePs4Juegos(TituloJuegos: String) {

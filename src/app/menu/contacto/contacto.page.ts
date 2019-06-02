@@ -9,21 +9,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './contacto.page.html',
   styleUrls: ['./contacto.page.scss'],
 })
-export class ContactoPage  {
- 
-to='aamonsalve@iesfranciscodelosrios.es';
-body='';
-subject='';
+export class ContactoPage {
+
+  to = 'aamonsalve@iesfranciscodelosrios.es';
+  body = '';
+  subject = '';
 
   constructor(
     private emailComposer: EmailComposer,
-    private navCtrl:NavController,
-    
-    ) {
-      
-     }
+    private navCtrl: NavController,
 
-  send(){
+  ) {
+
+  }
+
+  //funcion con la que enviamos los datos a una app de correo 
+  send() {
     let email = {
       to: this.to,
       cc: '',

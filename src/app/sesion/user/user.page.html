@@ -6,7 +6,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title style="color:white">
-      Usuario
+     {{ "Usuario" | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -19,24 +19,23 @@
       <img class="circle-pic" src="assets/fotos/logo.png" />
       <ion-row>
         <ion-col *ngFor="let item of listadoPanel;let i = index" text-center style="color:white">
-          ¡Bienvenido {{item.name}}!
+         {{ "¡Bienvenido" | translate}} {{item.name}} !
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="correo" text-center style="color:white">
-          Te has registrado con el correo: {{userEmail}}
+          {{ "Te has registrado con el correo:" | translate}} {{userEmail}}
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <p text-center style="color:white">Gracias por registrate en Insert Coin. Una vez que te registraste e iniciaste
-      sesión, podrás tener más funciones que los que inicien en modo invitado.  ¡A disdrutar!</p>
+    <p text-center style="color:white">{{"Gracias por registrate en Insert Coin. Una vez que te registraste e iniciaste sesión, podrás tener más funciones que los que inicien en modo invitado.  ¡A disdrutar!"  | translate}}</p>
   </div>
 
 </ion-content>
 <ion-footer color="#140B1C">
   <ion-toolbar color="secondary" color="#140B1C" (click)="logout()">
-    <ion-title class="desconectar" >Desconectarse</ion-title>
+    <ion-title class="desconectar" >{{"Desconectarse" | translate}}</ion-title>
   </ion-toolbar>
 </ion-footer>

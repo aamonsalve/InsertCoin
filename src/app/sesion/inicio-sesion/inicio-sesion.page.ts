@@ -10,24 +10,24 @@ import { Router } from '@angular/router';
   templateUrl: './inicio-sesion.page.html',
   styleUrls: ['./inicio-sesion.page.scss'],
 })
-export class InicioSesionPage  {
+export class InicioSesionPage {
   validations_form: FormGroup;
   errorMessage: string = '';
   email: string;
   password: string;
- 
+
   constructor(
- 
+
     private navCtrl: NavController,
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private alertCtrl: AlertController,
-    private router : Router
- 
+    private router: Router
+
   ) { }
- 
+
   ngOnInit() {
- 
+
     this.validations_form = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -39,8 +39,11 @@ export class InicioSesionPage  {
       ])),
     });
   }
- 
- 
+
+  /**
+      * funcion validar los campos
+      */
+
   validation_messages = {
     'email': [
       { type: 'required', message: 'Introduzca un email.' },
@@ -51,15 +54,24 @@ export class InicioSesionPage  {
       { type: 'minlength', message: 'Como mínimo 6 carascteres.' }
     ]
   };
- 
- 
-  login()
-  {
-    this.authService.login(this.email, this.password).then( res =>{
+
+  /**
+      * funcion para hacer la comprobacion de inicio sesion
+      */
+
+  login() {
+    this.authService.login(this.email, this.password).then(res => {
       this.router.navigate(['/home']);
-    }).catch(err =>  this.alerta("Error", "los datos son incorrectos o no existe el usuario"));
+    }).catch(err => this.alerta("Error", "los datos son incorrectos o no existe el usuario"));
   }
- 
+
+
+  /**
+    * funcion mostrar un alerta personalizado
+    * @param title 
+    * @param text
+    */
+
   async alerta(title, text) {
     let alert = await this.alertCtrl.create({
       header: title,
@@ -70,7 +82,7 @@ export class InicioSesionPage  {
         }
       ]
     });
-    alert.present(); 
-    }
- 
+    alert.present();
+  }
+
 }

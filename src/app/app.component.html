@@ -3,7 +3,7 @@
     <ion-menu>
       <ion-header>
         <ion-toolbar color="#2C1C3E">
-          <ion-title style="color:white">Menu</ion-title>
+          <ion-title style="color:white">{{"Menu" | translate }}</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content color="#140B1C">
@@ -12,7 +12,7 @@
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" color="#140B1C">
               <ion-icon class="menu" style="color:white" slot="start" [name]="p.icon"></ion-icon>
               <ion-label style="color:white">
-                {{p.title}}
+                {{p.title | translate }}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>

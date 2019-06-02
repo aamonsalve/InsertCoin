@@ -6,7 +6,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title style="color:white">
-      Inicio
+      {{"Inicio" | translate}}
     </ion-title>
     <ion-buttons slot="end" routerLink="/user">
       <img class="user" src="/assets/fotos/usuario.png" />
@@ -18,7 +18,7 @@
 
   <!--Buscador-->
   <ion-searchbar style="background-color: #003791" class="buscador" (ionChange)="buscar($event)"
-    (keyup.enter)="cerrar()" placeholder="Buscar" animated autocorrect="true"></ion-searchbar>
+    (keyup.enter)="cerrar()" placeholder="{{'Buscar' | translate}}" animated autocorrect="true"></ion-searchbar>
 
 </ion-header>
 
@@ -42,7 +42,7 @@
                   </ion-avatar>
                   <ion-label>
                     <h2> <b>{{item.titulo}}</b> </h2> 
-                    <p>{{item.descripcion}}</p>
+                    <p>{{item.descripcion | translate}}</p>
                   </ion-label>
             </ion-item>
 
@@ -59,6 +59,6 @@
 </ion-content>
 <ion-footer color="#2C1C3E">
   <ion-toolbar color="#2C1C3E">
-    <ion-title>Comunidades</ion-title>
+    <ion-title>{{"Comunidades" | translate}}</ion-title>
   </ion-toolbar>
 </ion-footer>

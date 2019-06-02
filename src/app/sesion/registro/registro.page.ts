@@ -15,41 +15,41 @@ export class RegistroPage implements OnInit {
   validations_form: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
-   public  email : string;
-  public   name : string;
-  public password : string;
+  public email: string;
+  public name: string;
+  public password: string;
   userEmail = [];
 
- 
+
   validation_messages = {
     'name': [
       { type: 'required', message: 'Introduzca el nombre.' },
       { type: 'pattern', message: 'Como mínimo 1 carascteres.' }
 
     ],
-   'email': [
-     { type: 'required', message: 'Introduzca un email.' },
-     { type: 'pattern', message: 'Introduce un email correcto.' }
-   ],
-   'password': [
-     { type: 'required', message: 'Introduzca una Contraseña.' },
-     { type: 'minlength', message: 'Como mínimo 6 carascteres.' }
-   ]
- };
- 
+    'email': [
+      { type: 'required', message: 'Introduzca un email.' },
+      { type: 'pattern', message: 'Introduce un email correcto.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Introduzca una Contraseña.' },
+      { type: 'minlength', message: 'Como mínimo 6 carascteres.' }
+    ]
+  };
+
   constructor(
     private navCtrl: NavController,
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private alertCtrl: AlertController,
     public loadingController: LoadingController,
-    private router : Router
+    private router: Router
   ) {
-    
+
   }
- 
-  ngOnInit( ){
-    
+
+  ngOnInit() {
+
     this.validations_form = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
         Validators.minLength(1),
@@ -68,6 +68,10 @@ export class RegistroPage implements OnInit {
 
   }
 
+  /**
+    * funcion para cargar el nombre 
+    */
+
   nombre() {
     this.presentLoading("Cargando");
     this.authService.getName(this.name).then((querySnapshot) => {
@@ -75,10 +79,16 @@ export class RegistroPage implements OnInit {
       querySnapshot.forEach((doc) => {
         this.userEmail.push({ id: doc.id, ...doc.data() });
       });
-     
+
       this.loadingController.dismiss();
     });
   }
+
+
+  /**
+    * funcion de alert mostrando que esta cargando
+    * @param msg
+    */
 
   async presentLoading(msg) {
     let myloading = await this.loadingController.create({
@@ -86,34 +96,47 @@ export class RegistroPage implements OnInit {
     });
     return await myloading.present();
   }
-  
-  Registrar(){
+
+
+
+  /**
+    * funcion para hacer el registro
+    */
+
+  Registrar() {
     this.presentLoading("Cargando");
     this.authService.getName(this.name).then((querySnapshot) => {
       this.userEmail = [];
       querySnapshot.forEach((doc) => {
         this.userEmail.push({ id: doc.id, ...doc.data() });
       });
-     
+
       this.loadingController.dismiss();
-    
-
-    console.log(this.userEmail);
 
 
-      if(this.userEmail < [1]){
-        this.authService.register(this.email, this.password,this.name).then( auth => {
+      console.log(this.userEmail);
+
+
+      if (this.userEmail < [1]) {
+        this.authService.register(this.email, this.password, this.name).then(auth => {
           this.router.navigate(['home'])
           console.log(auth)
         }).catch(err => console.log(err))
-       
-    }
-    else{
-      this.alerta("No creado", "Ya existe ese usuario.");
-      
-    }
-  });
+
+      }
+      else {
+        this.alerta("No creado", "Ya existe ese usuario.");
+
+      }
+    });
   }
+
+
+  /**
+    * funcion mostrar un alerta personalizado
+    * @param title 
+    * @param text
+    */
 
   async alerta(title, text) {
     let alert = await this.alertCtrl.create({
@@ -125,8 +148,8 @@ export class RegistroPage implements OnInit {
         }
       ]
     });
-    alert.present(); 
-    }
-  
+    alert.present();
+  }
+
 
 }
